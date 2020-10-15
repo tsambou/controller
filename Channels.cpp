@@ -3,9 +3,9 @@
 
 Channels::Channels()
 {
-	Modes mode[NofModes];
+	Modes mode[NofModes]; //...
 	
-	mode[0].param[0].setup(0,100, 0,2, 0,50); //volume
+	mode[0].param[0].setup(0,100, 0,2, 0,50); //volume!
 }
 
 
