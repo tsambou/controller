@@ -9,5 +9,6 @@ private:
 
 public:
 	Looper();
+	Channels channel[NofChannels];
 
 };
