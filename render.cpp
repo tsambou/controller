@@ -4,6 +4,7 @@
 #include "Encoders.h"
 //#include "Looper.h"
 
+Looper Loop;
 chip_control Chip_Control;
 Encoders Enc;
 
