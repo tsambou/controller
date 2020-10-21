@@ -14,7 +14,7 @@ void chip_control::setup(BelaContext *context){
 	pinMode(context,0,clock,OUTPUT);
 }
 
-void chip_control::write(BelaContext *context){
+void chip_control::run(BelaContext *context){
 	
 	for (unsigned int i=0; i<context->digitalFrames; i++)
 	{

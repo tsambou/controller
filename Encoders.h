@@ -1,20 +1,25 @@
 #include <Bela.h>
 #include "global.h"
+#include "Looper.h"
 
 class Encoders
 {
     
 private:
-    int mPin[10],mPin_prev[10];
-    int mButtonPin[5], mButtonPin_prev[5];
-    float mIncr[5],mIncr_prev[5];
-    
+	int EncNumber;
+	int mFrameA, mFrameB;
+	int mPinA, mPinB, mPinA_prev, mPinB_prev;
+	float mIncr, mIncr_prev;
     
 public:
     Encoders();
     
+    void setup(int index, int FrameA, int FrameB);
+    
     void read(BelaContext *context);
 
-    float getIncr(int index);
+    float getIncr();
+    
+    void update(Looper Loop, int ChSel, int ModeSel);
 
 };

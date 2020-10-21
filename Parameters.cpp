@@ -30,6 +30,7 @@ void Parameters::setup(float min_in, float max_in, float min_out, float max_out,
 
 void Parameters::update(float Increment)
 {
+    
     if (mEncVal + Increment > mMaxIn)
     {
         mEncVal = mMaxIn;

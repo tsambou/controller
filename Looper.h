@@ -1,4 +1,7 @@
 /***** Looper.h *****/
+
+#pragma once
+
 #include "Bela.h"
 #include "global.h"
 #include "Channels.h"
@@ -9,6 +12,6 @@ private:
 
 public:
 	Looper();
-	Channels channel[NofChannels];
-
+    Channels channel[NofChannels];
+    void setup();
 };

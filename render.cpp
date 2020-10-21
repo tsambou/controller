@@ -4,41 +4,46 @@
 #include "Encoders.h"
 #include "Looper.h"
 
-Looper Loop;
+Looper loop;
 chip_control Chip_Control;
-Encoders Enc;
+Encoders Enc[4];
 
 bool setup(BelaContext *context, void *userData)
 {
+	Enc[0].setup(0,4,6);
+	Enc[1].setup(1,0,2);
+	Enc[2].setup(2,10,8);
+	Enc[3].setup(3,14,12);
 	Chip_Control.setup(context);
+	loop.setup();
 	return true;
 }
 
 void render(BelaContext *context, void *userData)
 {
-	static int val[5] = {0};
+	static int val[4] = {0},SelCh = 0, SelMode = 0;
 
 	
-	Chip_Control.write(context);
+	Chip_Control.run(context);
 	
-	Enc.read(context);
-	
-	for (unsigned int i=0; i<5; i++)
-	{
-		val[i] = Enc.getIncr(i);
+	for (unsigned int i=0; i<NofEncoders; i++) {
+		Enc[i].read(context);
 	}
 	
-	
-	
-	if (gCount%3000 == 0)
+	if (gCount%100 == 0)
 	{
-		for (unsigned int i=0; i<5; i++)
-		{
-			rt_printf("%d\t",val[i]);
+		for (unsigned int i=0; i<NofEncoders; i++){
+			loop.channel[SelCh].mode[SelMode].param[i].update(Enc[i].getIncr());
+			//Enc[i].update(loop,SelCh,SelMode);
 		}
-		rt_printf("\n");
 	}
-	
+	if (gCount%1500 == 0){
+		for (unsigned int i=0; i<NofEncoders; i++){
+			rt_printf("Enc %d: %f\t",i,loop.channel[SelCh].mode[SelMode].param[i].getParam());
+		}
+		rt_printf("\n");	
+	}
+
 	gCount++;
 }
 

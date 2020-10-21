@@ -11,5 +11,5 @@ public:
 	chip_control();
 	void setup(BelaContext *context);
 	
-	void write(BelaContext *context);
+	void run(BelaContext *context);
 };
